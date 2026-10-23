@@ -1,5 +1,7 @@
 # Longhorn Wayfinder: Google Maps setup
 
+Built on Next.js 16.4.2 (patched for a published security advisory) with pnpm 12.3.4.
+
 ## Files
 
 | File | What it is |
@@ -15,16 +17,18 @@
 
 ## Steps
 
-1. Install the map library:
+1. Install dependencies with pnpm (the version is pinned in `package.json`; use npx if
+   your installed pnpm differs):
    ```bash
-   npm install @vis.gl/react-google-maps
+   npx pnpm@12.3.4 install
    ```
+   Don't use `npm install`: the project uses `pnpm-lock.yaml` only.
 2. In Google Cloud console: create a project, enable **Maps JavaScript API**, attach a billing
    account, and create an API key. Restrict it (HTTP referrers) to `localhost:3000/*` and your
    Vercel domain.
 3. Copy `.env.local.example` to `.env.local` and paste the key. On Vercel, add the same
    variable under Project → Settings → Environment Variables.
-4. `npm run dev`, then search **Jester West**. The floor plan turns on automatically.
+4. `npx pnpm@12.3.4 dev`, then search **Jester West**. The floor plan turns on automatically.
 5. Switch on **Satellite** in the layers menu and use the **Align floor plan** panel to nudge
    the plan until its walls sit on the roof outline. Click **Copy values** and paste them over
    the `center`, `widthM` and `heightM` lines in `lib/campus.ts`.
